@@ -4,4 +4,29 @@
     <meta charset="UTF-8">
     <title>Book</title>
 </head>
-
+<body>
+    <section>
+        <table border=1>
+        <thead>
+            <tr>
+                <td>Título</td>
+                <td>Orden</td>
+                <td>Archivo</td>
+                <td>Autor</td>
+                <td>Editorial</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in listbooks %}
+                <tr>
+                    <td>{{b.title}}</td>
+                    <td>{{b.order}}</td>
+                    <td>{{b.book_file}}</td>
+                    <td>{{b.author.first_name}} {{b.author.last_name}}</td>
+                    <td>{{b.editorial}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </section>
+</body>
