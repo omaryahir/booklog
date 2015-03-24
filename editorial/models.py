@@ -5,3 +5,6 @@ from django.db import models
 class Editorial(models.Model):
     name = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='editorial',blank=True,null=True)
+
+    def __unicode__(self):
+        return self.name

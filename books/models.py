@@ -12,3 +12,5 @@ class Book(models.Model):
     editorial = models.ForeignKey(Editorial)
     author = models.ForeignKey(Author)
 
+    def __unicode__(self):
+        return self.title
