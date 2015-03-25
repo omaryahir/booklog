@@ -17,6 +17,7 @@ urlpatterns = patterns('',
 if settings.DEBUG:
     # url static files
     urlpatterns += staticfiles_urlpatterns() 
+    
     # url uploaded media
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  

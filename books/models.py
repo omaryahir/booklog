@@ -7,7 +7,7 @@ from authors.models import Author
 class Book(models.Model):
     title = models.CharField(max_length=255)
     order = models.PositiveIntegerField()
-    book_file = models.FileField(upload_to='books')
+    cover_image = models.ImageField(upload_to='files/books')
 
     editorial = models.ForeignKey(Editorial)
     author = models.ForeignKey(Author)

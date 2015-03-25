@@ -4,7 +4,7 @@ from .models import Book
 # Register your models here.
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title','order','book_file','author','editorial')
+    list_display = ('title','order','cover_image','author','editorial')
     list_filter = ('author','editorial')
     ordering = ('order',)
 

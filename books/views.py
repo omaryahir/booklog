@@ -7,4 +7,4 @@ from .models import Book
 def listbooks_view(request):
     listbooks = Book.objects.all()
     #return HttpResponse('OK')
-    return render(request, 'listbook.html', {'listbooks': listbooks})
+    return render(request, 'books/listbook.html', {'listbooks': listbooks})
