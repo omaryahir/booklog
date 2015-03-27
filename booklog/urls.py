@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^listbooks/', 'books.views.listbooks_view', name='listbooks_view'),
+    url(r'', include('books.urls')),
 )
 
 if settings.DEBUG:
