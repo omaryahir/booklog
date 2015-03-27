@@ -31,3 +31,11 @@ def books_view(request, author):
     json_data = json.dumps(data)
     return HttpResponse(json_data, content_type='application/json')
 
+
+from django.core import serializers
+def books_serial_view(request):
+    data = serializers.serialize("xml", Book.objects.all())
+    return HttpResponse(data, content_type='application/xml')
+
+
+
