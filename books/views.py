@@ -37,5 +37,21 @@ def books_serial_view(request):
     data = serializers.serialize("json", Book.objects.all())
     return HttpResponse(data, content_type='application/json')
 
+from .forms import SumaForm
+def suma_view(request):
+    
+    resultado = 0
+    if request.method == "POST":
+        form = SumaForm(request.POST) 
+        if form.is_valid():
+            valor1 = form.cleaned_data['valor1']
+            valor2 = form.cleaned_data['valor2']
+            valor3 = form.cleaned_data['valor3']
+
+            resultado = float(valor1) + float(valor2)
+    else:
+        form = SumaForm()
+
+    return render(request, 'books/suma.html', {"form":form, "resultado":resultado})
 
 
