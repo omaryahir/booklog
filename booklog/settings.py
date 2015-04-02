@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'books',
     'editorial',
     'authors',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (
