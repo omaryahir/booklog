@@ -1,8 +1,11 @@
 from django import forms
+from .models import Book
 
 class SumaForm(forms.Form):
     valor1 = forms.IntegerField(label='El valor 1')
     valor2 = forms.IntegerField(label='El valor 2')
     valor3 = forms.IntegerField()
 
-
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book

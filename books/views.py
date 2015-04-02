@@ -4,7 +4,8 @@ from .models import Book
 from django.contrib.auth.decorators import login_required
 import json
 from django.core import serializers
-from .forms import SumaForm
+from .forms import SumaForm, BookForm
+from .models import Book
 
 
 # Create your views here.
@@ -53,3 +54,12 @@ def suma_view(request):
 
     return render(request, 'books/suma.html', {"form":form, "resultado":resultado})
 
+def book_create_view(request):
+    status = "NEW"
+    if request.method == "POST":
+        form = BookForm(request.POST, request.FILES)
+        form.save()
+        status = "NEW"
+    else:
+        form = BookForm()
+    return render(request, 'books/form.html', {"form":form, "status":status}) 
