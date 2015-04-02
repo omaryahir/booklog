@@ -6,4 +6,3 @@ class SumaForm(forms.Form):
     valor3 = forms.IntegerField()
 
 
-class

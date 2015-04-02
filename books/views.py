@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import Book
-
 from django.contrib.auth.decorators import login_required
-
 import json
+from django.core import serializers
+from .forms import SumaForm
+
 
 # Create your views here.
 
@@ -32,12 +33,10 @@ def books_view(request, author):
     return HttpResponse(json_data, content_type='application/json')
 
 
-from django.core import serializers
 def books_serial_view(request):
     data = serializers.serialize("json", Book.objects.all())
     return HttpResponse(data, content_type='application/json')
 
-from .forms import SumaForm
 def suma_view(request):
     
     resultado = 0
@@ -53,5 +52,4 @@ def suma_view(request):
         form = SumaForm()
 
     return render(request, 'books/suma.html', {"form":form, "resultado":resultado})
-
 
