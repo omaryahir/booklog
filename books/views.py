@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Book
 from django.contrib.auth.decorators import login_required
 import json
@@ -58,7 +58,21 @@ def book_create_view(request):
     if request.method == "POST":
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            form.save() 
+            return HttpResponseRedirect("/listbooks/")
     else:
         form = BookForm()
     return render(request, 'books/form.html', {"form":form}) 
+
+def book_edit_view(request, id_book):
+    b = Book.objects.get(pk=id_book)
+
+    if request.method == "POST":
+        form = BookForm(request.POST, request.FILES, instance=b)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/listbooks/")
+    else:
+        form = BookForm(instance=b)
+
+    return render(request, 'books/form.html', {'form':form})

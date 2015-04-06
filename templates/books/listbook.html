@@ -24,6 +24,7 @@
                     <td><img src='{{b.cover_image.url}}'></td>
                     <td>{{b.author.first_name}} {{b.author.last_name}}</td>
                     <td>{{b.editorial}}</td>
+                    <td><a href="/edit_book/{{ b.id }}">Editar</a></td>
                 </tr>
             {% endfor %}
         </tbody>
