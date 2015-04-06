@@ -55,11 +55,10 @@ def suma_view(request):
     return render(request, 'books/suma.html', {"form":form, "resultado":resultado})
 
 def book_create_view(request):
-    status = "NEW"
     if request.method == "POST":
         form = BookForm(request.POST, request.FILES)
-        form.save()
-        status = "NEW"
+        if form.is_valid():
+            form.save()
     else:
         form = BookForm()
-    return render(request, 'books/form.html', {"form":form, "status":status}) 
+    return render(request, 'books/form.html', {"form":form}) 
