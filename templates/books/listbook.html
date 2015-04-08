@@ -2,6 +2,7 @@
 {% block contenido %}
 
     <section>
+        Fecha y hora: {% now "SHORT_DATETIME_FORMAT" %}
         <table class="table table-bordered">
         <thead>
             <tr>
@@ -10,16 +11,29 @@
                 <td>Archivo</td>
                 <td>Autor</td>
                 <td>Editorial</td>
+                <td>Publicación</td>
             </tr>
         </thead>
         <tbody>
+              
             {% for b in listbooks %}
                 <tr>
-                    <td>{{b.title}}</td>
-                    <td>{{b.order}}</td>
-                    <td><img width="100" class="img-thumbnail" src='{{b.cover_image.url}}'></td>
+                    <td>
+                    {{b.title|upper}}<br>
+                    {{b.title|lower}}<br>
+                    {{b.title|length}}<br>
+                    </td>
+                    {% if b.order == 1 %}
+                         <td><span class="label label-primary">Principal</span></td>
+                    {% elif b.order < 4 %}
+                         <td><span class="label label-warning">Medio</span></td>
+                    {% else %}
+                         <td><span class="label label-default">Bajo</span></td>
+                    {% endif %}
+                    <td><img width="100" src='{{b.cover_image.url}}'></td>
                     <td>{{b.author.first_name}} {{b.author.last_name}}</td>
                     <td>{{b.editorial}}</td>
+                    <td>{{b.published|date:"H:i Y/M/d"}}</td>
                     <td><a class="btn btn-primary" href="/edit_book/{{ b.id }}">Editar</a></td>
                 </tr>
             {% endfor %}

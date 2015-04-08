@@ -1,6 +1,7 @@
 from django.db import models
 from editorial.models import Editorial
 from authors.models import Author
+from datetime import datetime
 
 # Create your models here.
 
@@ -11,6 +12,8 @@ class Book(models.Model):
 
     editorial = models.ForeignKey(Editorial)
     author = models.ForeignKey(Author)
+
+    published = models.DateTimeField(default=datetime.now())
 
     def __unicode__(self):
         return self.title
