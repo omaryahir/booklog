@@ -14,3 +14,12 @@ class Book(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def image_tag(self):
+        if self.cover_image:
+            return u'<img src="%s" width=100 />' % self.cover_image.url
+        else:
+            return u'Sin imagen'
+    
+    image_tag.short_description = 'Cubierta'
+    image_tag.allow_tags = 'True'
