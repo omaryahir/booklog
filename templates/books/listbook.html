@@ -1,12 +1,8 @@
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Book</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block contenido %}
+
     <section>
-        <table border=1>
+        <table class="table table-bordered">
         <thead>
             <tr>
                 <td>Título</td>
@@ -21,13 +17,13 @@
                 <tr>
                     <td>{{b.title}}</td>
                     <td>{{b.order}}</td>
-                    <td><img src='{{b.cover_image.url}}'></td>
+                    <td><img width="100" class="img-thumbnail" src='{{b.cover_image.url}}'></td>
                     <td>{{b.author.first_name}} {{b.author.last_name}}</td>
                     <td>{{b.editorial}}</td>
-                    <td><a href="/edit_book/{{ b.id }}">Editar</a></td>
+                    <td><a class="btn btn-primary" href="/edit_book/{{ b.id }}">Editar</a></td>
                 </tr>
             {% endfor %}
         </tbody>
         </table>
     </section>
-</body>
+{% endblock %}
