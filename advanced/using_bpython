@@ -1,0 +1,16 @@
+from books.models import Book
+Book.objects.all()
+# OUT: [<Book: Yo Robot>, <Book: Zonas erróneas>, <Book: El hombre en busca de sentido>, <Book: La guía definitiva de Django>, <Book: El arte de no amargarse la vida>]
+cadena = "anita lava la tina"
+cadena
+# OUT: 'anita lava la tina'
+import random
+random.shuffle(list(cadena))
+cadena
+# OUT: 'anita lava la tina'
+cadena = list(cadena)
+random.shuffle(cadena)
+cadena
+# OUT: ['n', 'a', ' ', 'a', ' ', 'l', 't', 'a', 't', 'a', 'a', 'v', 'i', 'l', 'i', 'a', ' ', 'n']
+print "".join(cadena)
+# OUT: na a ltataavilia n
