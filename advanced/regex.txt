@@ -1,0 +1,36 @@
+
+
+Probar en rubular.com
+En la parte inferior de la página tienen un quick reference.
+
+Caso: 
+
+XXX-XX-XXX-XX
+
+Expresión:
+
+[0-9]{3}\-[0-9]{2}\-[0-9]{3}\-[0-9]{2}
+
+Otra forma de hacerlo es:
+
+[\d]{3}\-[\d]{2}\-[\d]{3}\-[\d]{2}
+
+Si se quisiera negar el primero:
+
+[^\d]{3}\-[\d]{2}\-[\d]{3}\-[\d]{2}
+
+
+
+Caso:
+
+Validar contacto de twitter:
+
+@nombredelcontacto
+
+Características: Letras mayúsculas y minúsculas y admitir guión y guión bajo.
+
+Expresión:
+
+
+
+
