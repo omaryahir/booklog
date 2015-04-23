@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 
 # Cargar la librería
 import re
@@ -59,6 +60,46 @@ re.findall(r'([n|N]orte|[s|S]ur|[e|E]ste|[o|O]este])', "El oeste esta a 1 lux de
 
 #Salida: ['oeste', 'norte', 'Sur', 'oeste']
 
+
+"""
+Ejercicio:
+
+a) Encontrar los números en la oración:
+   L05 NUM3R0 53RAN 3L1M1NAD05.
+   Posteriormente los espacios en la anterior
+   por guiones bajos.
+
+b) Obtener una lista de las palabras por cada oración
+"""
+
+#Solución a)
+sinnum = re.sub(r'[0-9]','','L05 NUM3R0 53RAN 3L1M1NAD05.') 
+# Otra forma es con sinnum = re.sub(r'\d','',sinnum)
+conguion = re.sub(r'\s','_',sinnum)
+print "sinnum %s\nconguion %s" % (sinnum,conguion)
+#Salida:
+#sinnum: L NUMR RAN LMNAD.
+#conguion: L_NUMR_RAN_LMNAD.
+
+#Solución b)
+lista = re.findall(r'(\w+)',sinum)
+# Otra forma es usando: r'[a-zA-Z]+' o también r'[^_]+
+print lista
+#Salida: ['L', 'NUMR', 'RAN', 'LMNAD']
+
+
+"""
+NOTA IMPORTANTE:
+
+Existen símbolos como la ñ, para este fin es muy importante
+utilizar el sufijo u, Ejemplo:
+
+ur"^@([\w\-]+)$" 
+
+"""
+#Ejemplo:
+string = u'españa'
+re.sub(ur'ñ', u'ny', string)
 
 
 
