@@ -7,6 +7,8 @@ from django.core import serializers
 from .forms import SumaForm, BookForm
 from .models import Book
 
+from django.views.generic import TemplateView
+
 
 # Create your views here.
 
@@ -76,3 +78,17 @@ def book_edit_view(request, id_book):
         form = BookForm(instance=b)
 
     return render(request, 'books/form.html', {'form':form})
+
+
+
+class MyMostBasicView(TemplateView):
+    template_name = "template_base.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(MyMostBasicView, self).get_context_data(**kwargs)
+        context["saludo"] = "Hola Mundo !"
+        return context
+
+        
+
+
