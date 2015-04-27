@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.23, for osx10.10 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.20, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: booklog
 -- ------------------------------------------------------
--- Server version	5.6.23
+-- Server version	5.6.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -127,7 +127,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$pkVdsajYV0bN$k6/uAjf32BCs9fsbyMMCTJKYlQc54cC/rtpNQs9XtZI=','2015-04-13 15:20:44',1,'admin','','','omaryahir@netwarmonitor.com',1,1,'2015-04-07 15:44:36');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$r4da4D0KD6EX$4BMpcX1NqL1b5umk5SSdq35UweaV6DmEryTMIx9eAaU=','2015-04-27 17:47:09',1,'admin','','','',1,1,'2015-04-27 17:28:35');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +202,7 @@ CREATE TABLE `authors_author` (
   `last_name` varchar(255) DEFAULT NULL,
   `biography` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +211,7 @@ CREATE TABLE `authors_author` (
 
 LOCK TABLES `authors_author` WRITE;
 /*!40000 ALTER TABLE `authors_author` DISABLE KEYS */;
-INSERT INTO `authors_author` VALUES (1,'Isaac','Asimov','Libros de Ciencia Ficción'),(2,'Wayne','Dyer','Doctor en Psicología por la Universidad de Michigan.'),(3,'Viktor','Frankl','Judío, Médico por la Universidad de Viena con especialidad en Neurología y Psiquiatría.\r\n\r\nEn 1942 fue deportado a los campos de concentración Nazi.'),(4,'R2D2',NULL,NULL);
+INSERT INTO `authors_author` VALUES (1,'Isaac','Asimov','Libros de Ciencia Ficción'),(2,'Stephen','Covey','Libros de auto-superación'),(3,'Hermes','Trismegisto','Filosofía antigüa');
 /*!40000 ALTER TABLE `authors_author` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,16 +226,16 @@ CREATE TABLE `books_book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `order` int(10) unsigned NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `editorial_id` int(11) NOT NULL,
   `cover_image` varchar(100) NOT NULL,
-  `author_id` int(11),
-  `editorial_id` int(11),
   `published` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `books_book_4f331e2f` (`author_id`),
   KEY `books_book_afcf8243` (`editorial_id`),
   CONSTRAINT `books_bo_editorial_id_4ad3f56cca1b06a0_fk_editorial_editorial_id` FOREIGN KEY (`editorial_id`) REFERENCES `editorial_editorial` (`id`),
   CONSTRAINT `books_book_author_id_2dadd3d55b6a7139_fk_authors_author_id` FOREIGN KEY (`author_id`) REFERENCES `authors_author` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +244,7 @@ CREATE TABLE `books_book` (
 
 LOCK TABLES `books_book` WRITE;
 /*!40000 ALTER TABLE `books_book` DISABLE KEYS */;
-INSERT INTO `books_book` VALUES (1,'Yo Robot',1,'files/books/yorobot.jpg',1,2,'2015-04-20 15:46:59'),(2,'Zonas erróneas',2,'files/books/ZonasErroneas.jpg',2,3,'2015-04-20 15:46:59'),(3,'El hombre en busca de sentido',3,'files/books/BuscaSentido.jpg',3,4,'2015-04-20 15:46:59'),(4,'La guía definitiva de Django',20,'files/books/r2d2-ch.png',3,1,'2015-04-20 15:46:59'),(5,'El arte de no amargarse la vida',21,'files/books/book1_699300-icon-30-book-128.png',2,2,'2015-04-20 15:46:59');
+INSERT INTO `books_book` VALUES (1,'Kybalion',1,3,3,'files/books/kjots.png','2015-04-27 17:55:28'),(2,'Yo Robot',2,1,2,'files/books/contents.png','2015-04-27 17:56:00'),(3,'Los 7 hábitos de la gente altamente efectiva',3,1,1,'files/books/book_address.png','2015-04-27 17:57:22');
 /*!40000 ALTER TABLE `books_book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +269,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_e8701ad4` (`user_id`),
   CONSTRAINT `djang_content_type_id_697914295151027a_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +278,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2015-04-07 17:02:33','1','Author object',1,'',9,1),(2,'2015-04-07 17:02:56','1','Editorial object',1,'',8,1),(3,'2015-04-07 17:07:55','2','Editorial object',1,'',8,1),(4,'2015-04-08 15:04:49','1','Yo Robot',1,'',7,1),(5,'2015-04-08 15:05:48','3','grijalbo',1,'',8,1),(6,'2015-04-08 15:08:03','2','Wayne Dyer',1,'',9,1),(7,'2015-04-08 15:08:06','2','Zonas erróneas',1,'',7,1),(8,'2015-04-08 15:10:09','4','Herder',1,'',8,1),(9,'2015-04-08 15:12:18','3','Viktor Frankl',1,'',9,1),(10,'2015-04-08 15:12:21','3','El hombre en busca de sentido',1,'',7,1),(11,'2015-04-08 15:14:31','4','Herder',2,'Changed logo.',8,1),(12,'2015-04-08 15:14:40','3','grijalbo',2,'Changed logo.',8,1),(13,'2015-04-08 15:15:28','2','Robot',2,'Changed name and logo.',8,1),(14,'2015-04-08 15:15:38','1','McGrawHill',2,'Changed logo.',8,1),(15,'2015-04-08 15:16:01','3','Viktor Frankl',2,'Changed biography.',9,1),(16,'2015-04-08 15:16:15','3','Viktor Frankl',2,'Changed biography.',9,1);
+INSERT INTO `django_admin_log` VALUES (1,'2015-04-27 17:48:51','1','Isaac',1,'',9,1),(2,'2015-04-27 17:49:32','2','Stephen',1,'',9,1),(3,'2015-04-27 17:50:59','3','Hermes',1,'',9,1),(4,'2015-04-27 17:51:29','1','McGrawHill',1,'',8,1),(5,'2015-04-27 17:51:54','2','Ficción',1,'',8,1),(6,'2015-04-27 17:52:14','3','Xtrange',1,'',8,1),(7,'2015-04-27 17:55:28','1','Kybalion',1,'',7,1),(8,'2015-04-27 17:56:00','2','Yo Robot',1,'',7,1),(9,'2015-04-27 17:57:22','3','Los 7 hábitos de la gente altamente efectiva',1,'',7,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -322,7 +322,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +331,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2015-04-07 15:43:32'),(2,'auth','0001_initial','2015-04-07 15:43:32'),(3,'admin','0001_initial','2015-04-07 15:43:33'),(4,'sessions','0001_initial','2015-04-07 15:43:33'),(5,'authors','0001_initial','2015-04-07 15:46:08'),(6,'books','0001_initial','2015-04-07 15:46:08'),(7,'editorial','0001_initial','2015-04-07 15:46:09'),(8,'books','0002_auto_20150407_1607','2015-04-07 16:07:36'),(9,'books','0003_book_published','2015-04-20 15:47:05');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2015-04-27 17:28:11'),(2,'auth','0001_initial','2015-04-27 17:28:11'),(3,'admin','0001_initial','2015-04-27 17:28:11'),(4,'authors','0001_initial','2015-04-27 17:28:11'),(5,'editorial','0001_initial','2015-04-27 17:28:11'),(6,'books','0001_initial','2015-04-27 17:28:11'),(7,'books','0002_auto_20150323_2309','2015-04-27 17:28:11'),(8,'books','0003_auto_20150325_2120','2015-04-27 17:28:11'),(9,'books','0004_auto_20150325_2221','2015-04-27 17:28:11'),(10,'books','0005_auto_20150325_2233','2015-04-27 17:28:11'),(11,'books','0006_auto_20150325_2238','2015-04-27 17:28:11'),(12,'books','0007_auto_20150325_2300','2015-04-27 17:28:11'),(13,'books','0008_book_published','2015-04-27 17:28:11'),(14,'editorial','0002_auto_20150325_2118','2015-04-27 17:28:11'),(15,'editorial','0003_auto_20150325_2221','2015-04-27 17:28:12'),(16,'editorial','0004_auto_20150325_2233','2015-04-27 17:28:12'),(17,'editorial','0005_auto_20150325_2238','2015-04-27 17:28:12'),(18,'sessions','0001_initial','2015-04-27 17:28:12'),(19,'books','0009_auto_20150427_1729','2015-04-27 17:30:04'),(20,'books','0010_auto_20150427_1735','2015-04-27 17:35:55');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,7 +357,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('24fm2jobadm2e67u7lfx2ye66ulgcys9','MTM1OWUzZTY1MzIwMDY2N2RkZjFiNjQ4NDA4YjlmNjEzY2VlYzQ5Njp7Il9hdXRoX3VzZXJfaGFzaCI6ImZlZTlhNGZkMzRlYjA3MThiZTRhNTdkY2IwZWJiOTUwYTliMGYwODgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9','2015-04-27 15:20:44'),('geo54879q0oa7vwxmzuhhg3qn3hc6f03','MTM1OWUzZTY1MzIwMDY2N2RkZjFiNjQ4NDA4YjlmNjEzY2VlYzQ5Njp7Il9hdXRoX3VzZXJfaGFzaCI6ImZlZTlhNGZkMzRlYjA3MThiZTRhNTdkY2IwZWJiOTUwYTliMGYwODgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9','2015-04-22 14:58:11');
+INSERT INTO `django_session` VALUES ('vqwhe98c4fcpy81opxe0hpkantnbvpj1','MjQ4MjNiY2E0MGJiZDk3NDAzOGNlYzY1YTY0YWFjMjZhMTQ5YTE2OTp7Il9hdXRoX3VzZXJfaGFzaCI6IjUwZGI4Nzk4ZDQyZWYwYTA1OTFkOTBiZGMzODVmZjBmOTZlZDU0YjYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9','2015-05-11 17:47:09');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +373,7 @@ CREATE TABLE `editorial_editorial` (
   `name` varchar(255) NOT NULL,
   `logo` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,7 +382,7 @@ CREATE TABLE `editorial_editorial` (
 
 LOCK TABLES `editorial_editorial` WRITE;
 /*!40000 ALTER TABLE `editorial_editorial` DISABLE KEYS */;
-INSERT INTO `editorial_editorial` VALUES (1,'McGrawHill','files/editorial/McGrawHill.jpg'),(2,'Robot','files/editorial/Robot_editorial.jpg'),(3,'grijalbo','files/editorial/grijalbo.jpg'),(4,'Herder','files/editorial/Herder.jpg');
+INSERT INTO `editorial_editorial` VALUES (1,'McGrawHill','files/editorial/target_700412-icon-41-target-arrow-128.png'),(2,'Ficción','files/editorial/time_clock-128.png'),(3,'Xtrange','files/editorial/money.png');
 /*!40000 ALTER TABLE `editorial_editorial` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -395,4 +395,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-21  7:42:46
+-- Dump completed on 2015-04-27 12:58:20
