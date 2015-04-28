@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Book
@@ -8,6 +10,8 @@ from .forms import SumaForm, BookForm
 from .models import Book
 
 from django.views.generic import TemplateView
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -89,13 +93,25 @@ class MyMostBasicView(TemplateView):
         context = super(MyMostBasicView, self).get_context_data(**kwargs)
         context["saludo"] = "Hola Mundo !"
         return context
+    
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(MyMostBasicView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         context['mensaje'] = "Método GET"
-        return HttpResponse(json.dumps(context))
+        ret = dict(context)
+        del ret['view']
+        print type(ret), ret
+        return HttpResponse(json.dumps(ret))
 
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        context['mensaje'] = "Método GET"
+        ret = dict(context)
+        del ret['view']
+        print type(ret), ret
+        return HttpResponse(json.dumps(ret))
 
-        
-
-
+       
