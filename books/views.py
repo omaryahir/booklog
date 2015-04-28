@@ -82,12 +82,19 @@ def book_edit_view(request, id_book):
 
 
 class MyMostBasicView(TemplateView):
+    """docstring for MyMostBasicView"""
     template_name = "template_base.html"
 
     def get_context_data(self, **kwargs):
         context = super(MyMostBasicView, self).get_context_data(**kwargs)
         context["saludo"] = "Hola Mundo !"
         return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        context['mensaje'] = "Método GET"
+        return HttpResponse(json.dumps(context))
+
 
         
 
