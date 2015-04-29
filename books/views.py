@@ -13,6 +13,8 @@ from django.views.generic import TemplateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
+from .mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
@@ -84,20 +86,28 @@ def book_edit_view(request, id_book):
     return render(request, 'books/form.html', {'form':form})
 
 
+class csrfExceptMixin(object):
+    """docstring for csrfExceptMixin"""
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        print "csrfExceptMixin"
+        return super(csrfExceptMixin, self).dispatch(request, *args, **kwargs)
 
-class MyMostBasicView(TemplateView):
+
+class MyMostBasicView(csrfExceptMixin, LoginRequiredMixin, TemplateView):
     """docstring for MyMostBasicView"""
     template_name = "template_base.html"
+   
+    #@method_decorator(csrf_exempt)
+    #def dispatch(self, request, *args, **kwargs):
+    #    print "MyMostBasicView"
+    #    return super(MyMostBasicView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(MyMostBasicView, self).get_context_data(**kwargs)
         context["saludo"] = "Hola Mundo !"
         return context
-    
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super(MyMostBasicView, self).dispatch(request, *args, **kwargs)
-
+ 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         context['mensaje'] = "Método GET"
