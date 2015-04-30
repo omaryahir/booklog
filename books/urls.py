@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^create_book', book_create_view, name='create_book'),
     url(r'^edit_book/(?P<id_book>[0-9]+)', book_edit_view, name='edit_book'),
 
-    url(r'^demo2/$', MyMostBasicView.as_view(), name='demo2')
-    
+    url(r'^demo2/$', MyMostBasicView.as_view(), name='demo2'),
+    url(r'^session/$', CreateSessionView.as_view(), name='session')
+
 )

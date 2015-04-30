@@ -125,3 +125,37 @@ class MyMostBasicView(csrfExceptMixin, LoginRequiredMixin, TemplateView):
         return HttpResponse(json.dumps(ret))
 
        
+
+class CreateSessionView(TemplateView):
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CreateSessionView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        my_session = {}
+        if 'key' in request.GET:
+            value = request.session.get(request.GET['key'], None)
+            if value is not None:
+                my_session[request.GET['key']] = request.session[request.GET['key']]
+            else:
+                my_session['msg'] = u"La variable %s no existe en sesión." % request.GET['key']
+        else:
+            my_session.update({'msg': "Error. Solicitud mal formada"})
+        return HttpResponse(json.dumps(my_session))
+
+    def post(self, request, *args, **kwargs):
+        my_session = {}
+        if 'add' in request.POST:
+            if 'key' in request.POST and 'value' in request.POST:
+                request.session[request.POST['key']] = request.POST['value']
+                my_session['msg'] = u"La variable de sesión %s ha sido registrada correctamente" % request.POST['key']
+        elif 'delete' in request.POST and 'key' in request.POST:
+            if request.session.get(request.POST['key'], None) is not None:
+                del request.session[request.POST['key']]
+                my_session['msg'] = u"La variable de sesión %s ha sido eliminada correctamente" % request.POST['key']
+        else:
+            my_session.update({'msg': "Error. Solicitud mal formada"})
+        return HttpResponse(json.dumps(my_session))
+
+
