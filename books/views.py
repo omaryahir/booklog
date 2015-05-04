@@ -6,10 +6,10 @@ from .models import Book
 from django.contrib.auth.decorators import login_required
 import json
 from django.core import serializers
-from .forms import SumaForm, BookForm
+from .forms import SumaForm, BookForm, ContactForm
 from .models import Book
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
@@ -157,5 +157,15 @@ class CreateSessionView(TemplateView):
         else:
             my_session.update({'msg': "Error. Solicitud mal formada"})
         return HttpResponse(json.dumps(my_session))
+
+
+class ContactView(FormView):
+    """
+    Class-based View for the contact page ...
+    """
+    template_name = "contact.html"
+    form_class = ContactForm
+    success_url = '/contact/thank_you'
+
 
 
