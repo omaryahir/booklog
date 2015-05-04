@@ -22,8 +22,7 @@ class ContactForm(forms.Form):
         ("Aclaraciones", "Aclaraciones"),
         ("Contacto", "Contacto"),
         ("Legal", "Legal"))
-    asunto = forms.ChoiceField(choices=options, required=True)
-                             #initial=options[0])
+    asunto = forms.ChoiceField(choices=options, required=True, initial=options[0])
     correo = forms.EmailField()
     mensaje = forms.CharField(widget=forms.Textarea(
                 attrs={'placeholder':"Escriba su mensaje"}))
