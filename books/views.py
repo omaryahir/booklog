@@ -167,5 +167,9 @@ class ContactView(FormView):
     form_class = ContactForm
     success_url = '/contact/thank_you'
 
+    def form_valid(self, form):
+        form.send_mail()
+        return super(ContactView, self).form_valid(form)
+
 
 
