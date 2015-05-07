@@ -18,4 +18,6 @@ urlpatterns = patterns('',
     url(r'^contact/$', ContactView.as_view(), name="contact"),
     url(r'^contact/thank_you/$', TemplateView.as_view(template_name="thank_you.html"), name="thank_you"),
 
+    url(r'^template_tag/$', TemplateTestView.as_view(), name="template_tag"),
+
 )

@@ -172,4 +172,20 @@ class ContactView(FormView):
         return super(ContactView, self).form_valid(form)
 
 
+class TemplateTestView(TemplateView):
+    template_name = "template_tag.html"
+    """ docstring for TemplateTestView """
+    def get_context_data(self, **kwargs):
+        context = super(TemplateTestView, self).get_context_data(**kwargs)
+        context["table"] = {
+            'title': ["#", "Nombre", "Apellidos"],
+            'content':
+            [
+                [1, "Anacleto", "Gómez"],
+                [2, "José", "López"],
+                [3, "Maria", "Gónzalez"],
+            ]
+        }
+        return context
+
 
