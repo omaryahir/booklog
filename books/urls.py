@@ -19,5 +19,6 @@ urlpatterns = patterns('',
     url(r'^contact/thank_you/$', TemplateView.as_view(template_name="thank_you.html"), name="thank_you"),
 
     url(r'^template_tag/$', TemplateTestView.as_view(), name="template_tag"),
+    url(r'^filter/$', FilterTestView.as_view(), name="filter"),
 
 )

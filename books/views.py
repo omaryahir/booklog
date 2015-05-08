@@ -189,3 +189,11 @@ class TemplateTestView(TemplateView):
         return context
 
 
+class FilterTestView(TemplateView):
+    template_name = "template_filter.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super(FilterTestView, self).get_context_data(**kwargs)
+        context['my_string'] = "Pero abajo del sombrero ..."
+        return context
+
