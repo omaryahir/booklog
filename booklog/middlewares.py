@@ -5,6 +5,7 @@ import os.path
 class SelectDB(object):
 
     def process_request(self, request):
+        print request.META['HTTP_REFERER']
         print "inicio middleware"
         print os.path.isfile("booklog/database.txt")
         file_database = open("booklog/database.txt", "r")
