@@ -17,7 +17,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q23sf%#vbk_=ku%^8b6*x@ffweze0)a2tk3a&^%3nc^ntmh-ir'
+#SECRET_KEY = 'q23sf%#vbk_=ku%^8b6*x@ffweze0)a2tk3a&^%3nc^ntmh-ir'
+SECRET_KEY = 'prueba2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,6 +43,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'booklog.middlewares.SelectDB',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -63,7 +65,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'booklog',
+        'NAME': 'booklog2',
         'USER': 'root',
         'PASSWORD': '',
     }
